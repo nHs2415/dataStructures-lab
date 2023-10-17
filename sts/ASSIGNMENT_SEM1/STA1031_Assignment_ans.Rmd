@@ -1,0 +1,42 @@
+---
+title: "STA1031_Assinment 2"
+author: "S/20510"
+date: "2023-08-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## 1
+```{r libraries}
+library(ggplot2)
+data(diamonds)
+attach(diamonds)
+str(diamonds)
+ggplot(data=diamonds, mapping=aes(x=clarity)) + 
+geom_bar(color = "dark green", fill = "light green") +
+labs(title = "Bar chart of the Clarity variable", x="clarity", y="Frequency") +
+coord_flip()
+
+ggplot(diamonds, aes(x=factor(1), fill = color)) + geom_bar(width = 1) + 
+coord_polar("y") + theme_void()
+
+ggplot(diamonds, aes(x=depth))+
+geom_histogram(binwidth = 1.5, color="black", fill="purple")+
+labs(title = "Depth of Diamonds", x="depth", y="Frequency")+
+  geom_vline(aes(xintercept=mean(depth)), color="white", linetype="dashed")+
+  geom_vline(aes(xintercept=median(depth)), color="red", linetype="dashed")
+
+
+
+ggplot(diamonds, aes(y=x, x=cut, fill=cut)) + 
+geom_boxplot()+
+labs(title = "Boxplot for Length vs Cut", x="Quality of the cut", y="Length in mm")
+```
+
+
+
+
+
+

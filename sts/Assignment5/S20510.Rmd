@@ -1,0 +1,298 @@
+---
+title: "STA1041 Statistics Applications II <br> Assignment 5"
+author: "S/20/510"
+date: "2023-08-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+### 1
+### I)
+```{r}
+x<-1:10
+plot(dbinom(x,size = 10,prob = 0.2),type = 'h',xlab = 'x',ylab = 'probability',main = "Binomial Probability Mass Function")
+```
+
+### II)
+```{r}
+x<-1:10
+plot(dbinom(x,size = 10,prob = 0.4),type = 'h',xlab = 'x',ylab = 'probability',main = "Binomial Probability Mass Function")
+```
+
+### 2
+### I)
+```{r}
+#probability getting fewer than 20 heads
+pbinom(19,size = 50,prob = 0.4,lower.tail = TRUE)
+```
+
+### II)
+```{r}
+#probability getting more than 30
+pbinom(31,size = 50,prob = 0.4,lower.tail = FALSE)
+```
+
+### III)
+```{r}
+#P(15<x<25)
+(pbinom(24,size = 50,prob = 0.4,lower.tail = TRUE)-pbinom(15,size = 50,prob = 0.4,lower.tail = FALSE))
+```
+
+### 3
+### I)
+```{r}
+#P(student answer exactly 35 questions)
+dbinom(35,size = 50,prob = 0.7)
+```
+
+### II)
+```{r}
+#p(the probability that the student pass the exam with 70% graded)
+pbinom(35,size = 50,prob = 0.7,lower.tail = FALSE)
+```
+
+### III)
+```{r}
+#P(20<=x<40)
+dbinom(20:39,size = 50,prob = 0.7)
+```
+
+### 4
+### I)
+```{r}
+#P(30 student pass the quiz)
+dbinom(30,size = 100,prob = 0.3)
+```
+
+### II) 
+```{r}
+#i)
+set.seed(10)
+rbinom(1000,size = 100,prob = 0.3)
+
+#ii)
+# Plot a histogram
+library(ggplot2)
+# Create a data frame with the simulated data
+# Simulate 1000 sets of data
+simulated_data <- rbinom(1000, size = 100, prob = 0.3)
+data <- data.frame(Students_Passing = simulated_data)
+ggplot(data, aes(x = Students_Passing)) +
+  geom_histogram(aes(y = ..count../sum(..count..)), bins = 20, fill = "steelblue", color = "white") +
+  labs(x = "Number of Students Passing", y = "Proportion", title = "Simulation of Students Passing Math Quiz") +
+  theme_minimal()
+```
+
+### 5
+### I)
+```{r}
+#P(having exactly 10 customers in the next hour)
+#lambda=customers visiting a coffee shop in 1 hour=15
+dpois(10,15)
+```
+
+II)
+```{r}
+#P(x>=20)
+ppois(20-1,15,lower.tail = FALSE)
+```
+
+### 6
+### I)
+```{r}
+#lambda=average number of accident per day=2
+dpois(3,2)
+```
+
+### II)
+```{r}
+set.seed(100)
+mean_per_50days<-2
+rpois(50,mean_per_50days)
+```
+
+### III)
+```{r}
+ppois(5,2,lower.tail = FALSE)
+```
+
+### 7
+### I)
+```{r}
+#successful event that happened in an hour
+k<-10
+mean_per_hour<-12
+dpois(k,mean_per_hour)
+```
+
+### II)
+```{r}
+#p(12<x<18)
+mean_per_15hour<-12*15
+ppois(18-1,mean_per_15hour,lower.tail = TRUE)-ppois(12,mean_per_15hour,lower.tail = TRUE)
+```
+
+```{r}
+mean_per_3hours<-12*3
+ppois(20,mean_per_3hours,lower.tail = TRUE)
+```
+
+### 8
+### I)
+```{r}
+average_per_hour<-5
+average_per_minutes<-5/60
+average_per_15minutes<-(5/60)*15
+ppois(3,average_per_15minutes,lower.tail = TRUE)
+```
+
+### II)
+```{r}
+#P(x>8)
+average_per_hour<-5
+average_per_2hours<-5*2
+ppois(8,average_per_2hours,lower.tail = FALSE)
+```
+
+### III)
+```{r}
+#P(4<=x<=6)
+average_per_30minutes<-5/2
+ppois(6,average_per_30minutes,lower.tail = TRUE)-ppois(4-1,average_per_30minutes,lower.tail = TRUE)
+```
+
+### 9
+### I)
+```{r}
+#There are specific time duration between [1.5,3.5].hence it should be uniform distribution
+set.seed(100)
+x <- runif(500,min = 1.5,max = 3.5)
+x
+```
+
+### II)
+### a.
+```{r}
+x <- runif(500,min = 1.5,max = 3.5)
+dunif(x,min = 1.5,max = 3.5)
+```
+
+### b.
+```{r}
+x<-seq(1.5,3.5,length.out = 1000)
+dunif(x,min = 1.5,max = 3.5)
+plot(x,dunif(x,min = 1.5,max = 3.5),main = "Probability Density Function of Ride Duration",xlab = "Ride Duration(minutes)",ylab = "Density")
+```
+
+### III)
+```{r}
+#mean of ride duration of roller coaster
+x<-mean(runif(500,min = 1.5,max = 3.5))
+print(paste("mean : ",x))
+y<-var(runif(500,min = 1.5,max = 3.5))
+print(paste("variance : ",y))
+
+#Theoretical mean and variance
+mean<-(1.5+3.5)/2
+print(paste("Theoretical mean :",mean))
+variance<-var(seq(1.5,3.5))
+print(paste("Theoretical variance :",variance))
+
+#both mean values are pretty similar in both cases
+```
+
+### 10
+### I)
+```{r}
+#P(x<50)
+punif(50,min = 20,max = 100,lower.tail = TRUE)
+```
+
+### II)
+```{r}
+#P(70<internet speed<90)
+punif(90,min = 20,max = 100,lower.tail = TRUE)-punif(70,min = 20,max = 100,lower.tail = TRUE)
+```
+
+### III)
+```{r}
+#P(x>=25)
+punif(25,min = 20,max = 100,lower.tail = FALSE)
+```
+
+### 11
+### I)
+```{r}
+N<-3500
+rate<-1/30
+set.seed(123)
+rexp(N, rate )
+mean<-mean(rexp(N, rate ))
+print(paste("Mean : ",mean))
+variance<-var(rexp(N, rate ))
+print(paste("Variance : ",variance))
+print(paste("Hence the calculated mean equals to mentioned mean"))
+```
+
+### II)
+```{r}
+#P(x>50)
+rate<-1/30
+pexp(50,rate =1/30,lower.tail = FALSE)
+```
+
+### III)
+```{r}
+pexp(20,rate = 1/30,lower.tail = TRUE)
+```
+
+### 12
+### I)
+```{r}
+# a.
+round(dnorm(4.5,mean = 2, sd = 0.9),5)
+# b.
+round(dnorm(3.8,mean = 2, sd = 0.9),5)
+# c.
+round(dnorm(0,mean = 2, sd = 0.9),5)
+# d.
+round(dnorm(5.0,mean = 2, sd = 0.9),5)
+```
+
+### II)
+```{r}
+
+```
+
+### 13
+### I)
+```{r}
+# i.
+x<-c(840, 910, 930, 950, 980, 1000, 1020, 1040, 1050, 1060, 1100, 1200, 1220, 1220, 1270)
+
+dnorm(x,mean = mean(x),sd = sd(x))
+
+# ii.
+plot(x,dnorm(x,mean = mean(x),sd(x)),xlab = "SAT scorses",ylab = "Probability Density Function",main = "Graph of probability Density Function")
+```
+
+### II)
+```{r}
+x<-c(840, 910, 930, 950, 980, 1000, 1020, 1040, 1050, 1060, 1100, 1200, 1220, 1220, 1270)
+pnorm(1275,mean = mean(x),sd = sd(x),lower.tail = TRUE)
+```
+
+### III)
+```{r}
+x<-c(840, 910, 930, 950, 980, 1000, 1020, 1040, 1050, 1060, 1100, 1200, 1220, 1220, 1270)
+pnorm(1300,mean = mean(x),sd = sd(x),lower.tail = FALSE)
+```
+
+### IV)
+```{r}
+x<-c(840, 910, 930, 950, 980, 1000, 1020, 1040, 1050, 1060, 1100, 1200, 1220, 1220, 1270)
+pnorm(1450,mean = mean(x),sd = sd(x),lower.tail = TRUE)-pnorm(1350,mean = mean(x),sd = sd(x),lower.tail = TRUE)
+```
+

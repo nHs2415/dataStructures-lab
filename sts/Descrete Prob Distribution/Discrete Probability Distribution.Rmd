@@ -1,0 +1,27 @@
+---
+title: "Discrete Probability Distribution"
+author: "S/20510"
+date: "2023-08-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+sum(dbinom(0:4,size = 10,prob = 1/2))
+```
+```{r}
+rbinom(8,size = 13,prob = 1/6).
+```
+
+
+```{r}
+rbinom(8,size = 13,prob = 1/6)
+hist(rbinom(8,size = 13,prob = 1/6))
+```
+```{r}
+pbinom(4,12,1/5)
+```
+

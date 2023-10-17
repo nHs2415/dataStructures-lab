@@ -1,0 +1,111 @@
+---
+title: "s20510_2022pp"
+author: "S/20/510"
+date: "2023-09-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+housePrice<-read.csv("./Data/housePrice.csv")
+attach(housePrice)
+head(housePrice,200)
+names(housePrice)<-"housePrice"
+
+#b
+summary(housePrice)
+str(housePrice)
+
+#c
+colSums(is.na(housePrice))
+
+library(corrplot)
+corMatrix <- cor(housePrice[c("soldPrice", "sqftLand", "sqftAbove", "sqftBasement")])
+corrplot(corMatrix, method = "circle")
+
+#d
+names(housePrice)
+housePrice$condition<-factor(housePrice$condition,labels = c(1,2,3),levels = c("average","good","excellent"))
+housePrice$condition
+housePrice$condition<- as.factor(housePrice$condition)
+housePrice$condition
+
+#
+shapiro.test(soldPrice)
+shapiro.test(sqftLiving)
+```
+
+### 2
+
+```{r}
+#i
+mean<-527
+standard_deviation<-112
+1-pnorm(500,mean, standard_deviation)
+
+#ii
+
+#iii
+pnorm(700,mean = mean,sd = standard_deviation)-pnorm(600,mean = mean,sd = standard_deviation)
+
+#iv
+pnorm(450,mean = mean,sd = standard_deviation)
+
+#b
+#i)
+lambda_per_minutes<-4
+labda_per_15minutes<-4/4
+
+
+#c
+dbinom(7,size = 12,prob = 0.60)
+1-pbinom(8-1,size = 12,prob = 0.60)
+
+dpois(7,3)
+1-ppois(4,3)
+
+x<-c(0,1,2)
+rep(x,12)
+
+hist(rnorm(400,mean = 50,sd = 10))
+
+set.seed(100)
+hist(rexp(100,rate = 1/1500))
+
+set.seed(123)
+matrix(runif(20,min = 5,max = 30),nrow = 4,ncol = 5,byrow = T)
+```
+
+```{r}
+x<-rnorm(40,mean = 0,sd = 1)
+x
+
+```
+
+```{r}
+x<-c()
+y<-c()
+least_square_slope<-function(x,y){
+  beta<-sum(((x-mean(x))*(y-mean(y)))/sum((x-mean(x)))^2)
+  alpha<-mean(y)-mean(x)*beta
+  vector1<-c(alpha,beta)
+  return(vector1)
+  
+  
+}
+least_square_slope(c(1,2),c(3,4))
+
+lm(c(3,4)~c(1,2))
+```
+```{r}
+library(readr)
+Empdata1<-data.frame(read.table("./Data/Employees.txt"))
+Empdata1
+
+mean(Score())
+```
+

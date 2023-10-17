@@ -1,0 +1,132 @@
+---
+title: "s20510Q1"
+author: "S/20/510"
+date: "2023-09-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 1
+#### a)
+```{r}
+# i)
+
+set.seed(42)
+x<-c(rnorm(40))
+entities_lessThan_1<-x[x<1]
+entities_lessThan_1
+
+
+# ii)
+
+entities_lessThan<-x[x>-0.5&x<1]
+entities_lessThan
+
+# iii)
+
+entities_largerThan1.5<-x[x>1.5]
+entities_largerThan1.5
+```
+
+### b
+```{r}
+x<-c()
+y<-c()
+real_vector<-function(x,y){
+  beta<-sum((x-mean(x))*(y-mean(y)))/sum((x-mean(x))^2)
+  alpha<-mean(y)-mean(x)*beta
+  vector1<-c(alpha,beta)
+  return(vector1)
+}
+real_vector(c(2,3),c(4,5))
+
+x<-c(2,3)
+y<-c(4,5)
+lm(y~x)
+```
+
+### c
+```{r}
+finding_roots<-function(a,b,c){ 
+  
+  
+  discriminant<- b^2 - 4*a*c
+  root1<- (-b + sqrt(discriminant))/2*a
+  root2<- (-b - sqrt(discriminant))/2*a
+  
+  
+  
+  if(discriminant==0){
+    print(paste("The discriminant is zero"))
+    print(paste("Therefore we have one real root"))
+    print(paste("The root is ",root1))
+  }else if (discriminant>0){
+    print(paste("The discriminant is greater than zero"))
+    print(paste("Therefore we have two distinct roots"))
+    print(paste("One root is",root1))
+    print(paste("Other_root",root2))
+  }else{
+    print(paste("The discriminant less than zero"))
+    print(paste("Therefore we have no real roots"))
+  }
+}
+finding_roots(1,2,1)
+```
+
+### d
+```{r}
+a<-c()
+b<-c()
+c<-c()
+
+finding_roots_vector<-function(a,b,c){ 
+  
+  
+  discriminant<- b^2 - 4*a*c
+  root1<- (-b + sqrt(discriminant))/2*a
+  root2<- (-b - sqrt(discriminant))/2*a
+  
+  
+  
+  if(all(discriminant)==0){
+    print(paste("The discriminant is zero"))
+    print(paste("Therefore we have one real root"))
+    print(paste("The root is ",root1))
+  }else if (all(discriminant)>0){
+    print(paste("The discriminant is greater than zero"))
+    print(paste("Therefore we have two distinct roots"))
+    print(paste("One root is",root1))
+    print(paste("Other_root",root2))
+  }else{
+    print(paste("The discriminant less than zero"))
+    print(paste("Therefore we have no real roots"))
+  }
+}
+finding_roots_vector(c(1,1,1),c(6,-5,1),c(9,6,1))
+```
+
+### 2
+```{r}
+
+library(readr)
+Empdata1<-read.table("./Data/Employees.txt")
+data.frame(Empdata1)
+#View(Empdata1)
+str(Empdata1)
+as.factor(Empdata1$V1)
+as.factor(Empdata1$V2)
+str(Empdata1)
+
+
+
+
+ggplot(Empdata1, aes(x=Height))+
+geom_histogram(binwidth = 6, color="black", fill="light blue")+
+labs(title = "", x="Height", y="Frequency")
+```
+
+
+

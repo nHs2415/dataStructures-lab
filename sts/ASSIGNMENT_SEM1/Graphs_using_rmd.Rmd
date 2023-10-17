@@ -1,0 +1,30 @@
+---
+title: "Graphs Using R Mark Down"
+author: "S/20510"
+date: "2023-08-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(ggplot2)
+data1<-data.frame(day=c("Mon","Tues","Wed","Thur","Fri") ,value=c(3,12,5,18,45))
+ggplot(data=data1, mapping=aes(x=day, y=value)) + geom_bar(stat = "identity")
+
+```
+```{r}
+data("ToothGrowth")
+attach(ToothGrowth)
+ggplot(ToothGrowth, aes(y=len)) + geom_boxplot()
+
+ggplot(ToothGrowth, aes(y=len)) + 
+geom_boxplot(color = "blue", fill="yellow") +
+labs(title = "Boxplot for Length", y="Tooth Length")
+str(ToothGrowth)
+ggplot(ToothGrowth, aes(y=len, x=supp, fill=supp)) + 
+geom_boxplot()
+
+```
+

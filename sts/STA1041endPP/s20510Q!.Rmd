@@ -1,0 +1,67 @@
+---
+title: "s20510Q1"
+author: "S/20/510"
+date: "2023-09-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 1
+
+```{r}
+#a)
+
+housePrice<-read.csv("./Data/housePrice.csv")
+housePrice
+attach(housePrice)
+head(housePrice,200)
+
+#b)
+
+summary(housePrice)
+str(housePrice)
+
+#c)
+
+any(is.na(housePrice))
+
+#d)
+
+names(housePrice$condition)<-c(1,2,3)
+as.factor(housePrice$condition)
+```
+
+
+### Q2
+### A)
+```{r}
+#a) i)
+
+mean<-527
+sd<-112
+
+pnorm(500,mean = mean,sd=sd)
+
+#ii)
+
+#iii)
+
+pnorm(700,mean = mean,sd=sd,lower.tail = TRUE)-pnorm(600,mean = mean, sd = sd,lower.tail = TRUE)
+
+#iv)
+
+pnorm(450,mean = mean,sd = sd,lower.tail = TRUE)
+```
+
+### b
+```{r}
+#i)
+#successful event per minute
+q<-60/15
+lambda=4/60
+pexp(30,lambda)
+```
+

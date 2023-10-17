@@ -1,0 +1,86 @@
+---
+title: "Mid Examination_Q1_Q2_answers"
+author: "S/20510"
+date: "2023-08-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries}
+library(ggplot2)
+```
+
+```{r loading-data}
+Loan_data <- read.csv("./Data/LoanData.csv")
+Loan_data
+```
+
+```{r}
+head(Loan_data,5)
+attach(Loan_data)
+```
+
+```{r}
+str(Loan_data)
+```
+
+```{r}
+Scatterplot <- ggplot(data=Loan_data, aes(x=Applicant_Income, y=Loan_Amount))+geom_point(aes(shape = Education),size = 3)+xlab("Applicant Income")+ylab("Loan Amount")+ggtitle("Relationship between Loan Amount and Applicant Income")
+Scatterplot
+```
+
+```{r}
+summary(Loan_data)
+```
+
+```{r}
+Loan_data$Property_Area <- as.factor(Property_Area)
+str(Loan_data)
+```
+
+```{r}
+boxplot<-ggplot(Loan_data,aes(x=Property_Area, y=Loan_Amount))+geom_boxplot()+scale_x_discrete(name="property area")+scale_y_continuous(name="loan amount",  breaks = seq(0,500,50), limits=c(0,500))+ggtitle("Box plot of Loan amount vs Property area")
+boxplot
+```
+
+```{r}
+sd <- read.csv("./Data/sales_data.csv")
+attach(sd)
+head(sd)
+```
+
+```{r}
+summary(sd)
+```
+
+```{r}
+total_sales <- function(sd){
+  total <- colSums(sd[,c("Product_A","Product_B")])
+  result <- data.frame(Product=c("Product_A","Product_B"),Total_sales = total)
+  return(result)
+}
+total_sales(sd)
+```
+
+```{r}
+average_sales <- function(sd){
+  average <- colMeans(sd[,c("Product_A","Product_B")])
+  result <- data.frame(Product = c("Product_A","Product_B"),Average_Sales = average)
+  return(result)
+}
+average_sales(sd)
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+

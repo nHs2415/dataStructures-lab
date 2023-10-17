@@ -1,2 +1,4 @@
-package PACKAGE_NAME;public class Bike9 {
+public class Bike9 {
+
 }
+
