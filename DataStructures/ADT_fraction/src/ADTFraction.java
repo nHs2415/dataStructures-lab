@@ -18,13 +18,6 @@ class Main{
 public class ADTFraction {
 
         private int n; //numerator
-
-
-
-
-
-
-
         private int d; //denominator
         //---------------------------------------------------
         public ADTFraction() {//default constructor
